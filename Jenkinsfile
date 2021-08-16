@@ -24,7 +24,7 @@ pipeline {
 //      }
     stages {
         stage("test") {
-          withEnv(["HOME=${env.WORKSPACE}"]) {
+//           withEnv(["HOME=${env.WORKSPACE}"]) {
             steps {
                 echo '> Running make test ...'
 //                 sh """make -sC domain_classifier test"""
@@ -35,7 +35,7 @@ pipeline {
 //                 sh "pip3 install flake8"
 //                 sh "flake8 ${WORKSPACE}/domain_classifier"
             }
-           }
+//            }
         }
         stage("autopep") {
             steps {
