@@ -30,7 +30,10 @@ pipeline {
                 echo '> Running make test ...'
 //                 sh """make -sC domain_classifier test"""
 //                 sh "./scripts/automation.sh"
-                echo "FILES_LIST : ${FILES_LIST}"
+                sh '''
+                    echo "Multiline shell steps works too"
+                    ls -lah
+                '''
                 sh "bash ${WORKSPACE}/scripts/automation.sh"
 //                 sh "bash ${WORKSPACE}/build_scripts/test.sh domain_classifier"
                 echo "--------Flake8 ${1}--------"
