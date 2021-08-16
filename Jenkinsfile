@@ -35,7 +35,7 @@ pipeline {
 //                 sh "pip3 install flake8"
 //                 sh "flake8 ${WORKSPACE}/domain_classifier"
             }
-//            }
+           }
         }
         stage("autopep") {
             steps {
