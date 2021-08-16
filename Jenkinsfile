@@ -24,6 +24,7 @@ pipeline {
         }
      }
     stages {
+
         stage("test") {
 //           withEnv(["HOME=${env.WORKSPACE}"]) {
             steps {
