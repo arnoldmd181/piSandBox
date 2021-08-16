@@ -3,26 +3,26 @@
 // def  FILES_LIST = sh (script: "ls   '${WORKSPACE}'", returnStdout: true).trim()
 
 pipeline {
-        agent any
-//     agent {
-//         kubernetes {
-//           defaultContainer 'python'
-//           yaml '''\
-//             apiVersion: v1
-//             kind: Pod
-//             spec:
-//               containers:
-//               - name: python
-//                 image: python:3.6
-//                 command:
-//                 - cat
-//                 tty: true
-//                 resources:
-//                   requests:
-//                     memory: 1Gi
-//             '''.stripIndent()
-//         }
-//      }
+//         agent any
+    agent {
+        kubernetes {
+          defaultContainer 'python'
+          yaml '''\
+            apiVersion: v1
+            kind: Pod
+            spec:
+              containers:
+              - name: python
+                image: python:3.6
+                command:
+                - cat
+                tty: true
+                resources:
+                  requests:
+                    memory: 1Gi
+            '''.stripIndent()
+        }
+     }
     stages {
         stage("test") {
 //           withEnv(["HOME=${env.WORKSPACE}"]) {
@@ -34,7 +34,7 @@ pipeline {
                     echo "Multiline shell steps works too"
                     ls -lah
                 '''
-                sh "bash ${WORKSPACE}/scripts/automation.sh"
+                sh "python3 ${WORKSPACE}/scripts/automation.py"
 //                 sh "bash ${WORKSPACE}/build_scripts/test.sh domain_classifier"
                 echo "--------Flake8 ${1}--------"
 //                 sh "pip3 install flake8"
