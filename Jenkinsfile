@@ -24,11 +24,12 @@ pipeline {
 //      }
     stages {
         stage("test") {
-//           withEnv(["HOME=${env.WORKSPACE}"]) {
+          withEnv(["HOME=${env.WORKSPACE}"]) {
             steps {
                 echo '> Running make test ...'
 //                 sh """make -sC domain_classifier test"""
-                sh "./scripts/automation.sh"
+//                 sh "./scripts/automation.sh"
+                sh "bash ${WORKSPACE}/scripts/automation.sh"
 //                 sh "bash ${WORKSPACE}/build_scripts/test.sh domain_classifier"
                 echo "--------Flake8 ${1}--------"
 //                 sh "pip3 install flake8"
