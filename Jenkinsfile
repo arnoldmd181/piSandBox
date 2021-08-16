@@ -1,6 +1,6 @@
 // def COMPONENTS = ['indexer', 'transformer', 'ingest-api']
 // def ACCOUNTS = ['dev': "263734463344", 'prod': "725071466363"]
-def  FILES_LIST = sh (script: "ls   '${WORKSPACE}'", returnStdout: true).trim()
+// def  FILES_LIST = sh (script: "ls   '${WORKSPACE}'", returnStdout: true).trim()
 
 pipeline {
         agent any
