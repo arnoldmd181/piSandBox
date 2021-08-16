@@ -1,5 +1,5 @@
-def COMPONENTS = ['indexer', 'transformer', 'ingest-api']
-def ACCOUNTS = ['dev': "263734463344", 'prod': "725071466363"]
+// def COMPONENTS = ['indexer', 'transformer', 'ingest-api']
+// def ACCOUNTS = ['dev': "263734463344", 'prod': "725071466363"]
 
 pipeline {
         agent any
