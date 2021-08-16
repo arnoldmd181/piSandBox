@@ -1,5 +1,6 @@
 // def COMPONENTS = ['indexer', 'transformer', 'ingest-api']
 // def ACCOUNTS = ['dev': "263734463344", 'prod': "725071466363"]
+def  FILES_LIST = sh (script: "ls   '${WORKSPACE}'", returnStdout: true).trim()
 
 pipeline {
         agent any
@@ -29,7 +30,7 @@ pipeline {
                 echo '> Running make test ...'
 //                 sh """make -sC domain_classifier test"""
 //                 sh "./scripts/automation.sh"
-                ls "${WORKSPACE}"
+                echo "FILES_LIST : ${FILES_LIST}"
                 sh "bash ${WORKSPACE}/scripts/automation.sh"
 //                 sh "bash ${WORKSPACE}/build_scripts/test.sh domain_classifier"
                 echo "--------Flake8 ${1}--------"
