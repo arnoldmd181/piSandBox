@@ -110,7 +110,7 @@ if __name__ == "__main__":
 
         except Exception as e:
             # logger.warning(f'Failed to read ETDR password so pymysql will not be set up correctly\n{e}')
-            print(f'Failed to read ETDR password so pymysql will not be set up correctly\n{e}')
+            print(f'Failed to read push to remote \n{e}')
     else:
         # logger.warning("No version update needed")
         print("No version update needed")
