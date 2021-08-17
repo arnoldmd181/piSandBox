@@ -23,9 +23,9 @@ pipeline {
             '''.stripIndent()
         }
      }
-        stages {
-        stages {
-            stage('Setup') { // Install any dependencies you need to perform testing
+
+    stages {
+        stage('Setup') { // Install any dependencies you need to perform testing
           steps {
             script {
               sh """
@@ -51,8 +51,7 @@ pipeline {
 //                 sh "pip3 install flake8"
 //                 sh "flake8 ${WORKSPACE}/domain_classifier"
             }
-//            }
-
+        }
 
         stage("autopep") {
             steps {
@@ -77,3 +76,4 @@ pipeline {
         }
     }
 }
+
