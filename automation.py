@@ -56,7 +56,7 @@ def git_push(repository, commit_message, origin):
 if __name__ == "__main__":
     # initialize_logging()
 
-    branch = "test1"  # TODO get from variables
+    branch = "dc-test"  # TODO get from variables
     origin_branch = f'origin/{branch}'
     repo = Repo("/Users/arnold.dajao/Documents/OldTask/Temp/piSandBox")  # TODO get from variables
     o = repo.remotes.origin
@@ -74,10 +74,10 @@ if __name__ == "__main__":
         path_changed = re.split(r'\/', full_filename)[0].lower()
         file_changed = re.split(r'\/', full_filename)[-1].lower()
         print(f"file updated: {full_filename}")
-        # if str(file_changed) == "_version.py":
-        #     # logger.fatal("_version.py was changed")
-        #     print("_version.py was changed")
-        #     exit(1)
+        if str(file_changed) == "_version.py":
+            # logger.fatal("_version.py was changed")
+            print("_version.py was changed")
+            exit(1)
         if str(path_changed) in CLASSIFIERS and str(file_changed) not in EXCLUSIONS:
             print(f"file added: {full_filename}")
             classifiers_updates.add(path_changed)
