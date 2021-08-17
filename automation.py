@@ -104,8 +104,9 @@ if __name__ == "__main__":
         try:
             repo.git.add(update=True)
             repo.index.commit(repo_commit_message)
-            origin = repo.remote(name=origin_branch)
-            origin.push()
+            # origin = repo.remote(name=origin_branch)
+            # origin.push()
+            repo.remotes.origin.push()
 
         except Exception as e:
             # logger.warning(f'Failed to read ETDR password so pymysql will not be set up correctly\n{e}')
