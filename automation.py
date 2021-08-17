@@ -106,8 +106,9 @@ if __name__ == "__main__":
             origin = repo.remote(name=origin_branch)
             origin.push()
 
-        except:
-            print('Some error occured while pushing the code')
+        except Exception as e:
+            # logger.warning(f'Failed to read ETDR password so pymysql will not be set up correctly\n{e}')
+            print(f'Failed to read ETDR password so pymysql will not be set up correctly\n{e}')
     else:
         # logger.warning("No version update needed")
         print("No version update needed")
