@@ -1,14 +1,11 @@
-import argparse
 import os
-
-import yaml
 from git import Repo
 import re
-import sys
-import logging
-from phishing_common.logger import LOGGER_NAME, initialize_logging
 
-logger = logging.getLogger(LOGGER_NAME)
+# import logging
+# from phishing_common.logger import LOGGER_NAME, initialize_logging
+
+# logger = logging.getLogger(LOGGER_NAME)
 
 PWD = os.path.abspath(os.path.dirname(__file__))
 MAIN_REPO = "origin/dev"
@@ -46,9 +43,11 @@ def update_version_classifiers(file_name, version, new_version, update_classifie
 
 
 if __name__ == "__main__":
-    initialize_logging()
+    # initialize_logging()
 
     repo = Repo("/Users/arnold.dajao/Documents/OldTask/Temp/piSandBox")  # TODO get from variables
+    o = repo.remotes.origin
+    o.pull()
 
     commit_dev = repo.commit("test1")  # TODO get from variables
     commit_origin_dev = repo.commit(MAIN_REPO)
@@ -58,12 +57,15 @@ if __name__ == "__main__":
 
     for diff_item in diff_index:
         # path = Path(diff_item.a_path).parent
-        path_changed = re.split(r'\/', diff_item.a_path)[0].lower()
-        file_changed = re.split(r'\/', diff_item.a_path)[-1].lower()
-        if str(file_changed) == "_version.py":
-            logger.fatal("_version.py was changed")
-            exit(1)
+        full_filename = diff_item.a_path
+        path_changed = re.split(r'\/', full_filename)[0].lower()
+        file_changed = re.split(r'\/', full_filename)[-1].lower()
+        # if str(file_changed) == "_version.py":
+        #     # logger.fatal("_version.py was changed")
+        #     print("_version.py was changed")
+        #     exit(1)
         if str(path_changed) in CLASSIFIERS and str(file_changed) not in CLASSIFIERS:
+            print(f"file updated: {full_filename}")
             classifiers_updates.add(path_changed)
 
     if classifiers_updates:
@@ -81,5 +83,5 @@ if __name__ == "__main__":
 
             update_version_classifiers(version_file, current_version, new_version_incr, classifier)
     else:
-        logger.warning("No version update needed")
-
+        # logger.warning("No version update needed")
+        print("No version update needed")
