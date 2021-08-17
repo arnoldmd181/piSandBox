@@ -28,7 +28,8 @@ def update_version_classifiers(file_name, version, new_version, update_classifie
     update_version_deps(file_name, version, new_version)
 
     if update_classifier == "phishing_common":
-        for classifier_setup in CLASSIFIERS.pop():
+        classifiers = CLASSIFIERS.pop()
+        for classifier_setup in classifiers:
             setup_file = PWD + f'/{classifier_setup}/setup.py'
             update_version_deps(setup_file, version, new_version)
     elif update_classifier == "domain_classifier":
