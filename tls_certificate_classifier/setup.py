@@ -25,8 +25,8 @@ setup(
         'tldextract',
         'urllib3',
         # Internal ironnet projects
-        'phishing_common==0.1.2_dev2',
-        'domain_classifier==0.1.2_dev2'
+        'phishing_common==0.1.4_dev2',
+        'domain_classifier==0.1.4_dev2'
     ],
     include_package_data=False
 )
