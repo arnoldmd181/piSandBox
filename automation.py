@@ -98,8 +98,16 @@ if __name__ == "__main__":
 
         ver_changes_changes = ', '.join(classifiers_updates)
         repo_commit_message = f'automation updated versions for {ver_changes_changes}'
-        git_push(repo, repo_commit_message, origin_branch)
+        # git_push(repo, repo_commit_message, origin_branch)
 
+        try:
+            repo.git.add(update=True)
+            repo.index.commit(repo_commit_message)
+            origin = repo.remote(name=origin_branch)
+            origin.push()
+
+        except:
+            print('Some error occured while pushing the code')
     else:
         # logger.warning("No version update needed")
         print("No version update needed")
