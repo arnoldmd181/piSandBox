@@ -42,14 +42,26 @@ def update_version_classifiers(file_name, version, new_version, update_classifie
         update_version_deps(setup_file, version, new_version)
 
 
+def git_push(repository, commit_message, origin):
+    try:
+        repository.git.add(update=True)
+        repository.index.commit(commit_message)
+        origin = repository.remote(name=origin)
+        origin.push()
+
+    except:
+        print('Some error occured while pushing the code')
+
+
 if __name__ == "__main__":
     # initialize_logging()
 
+    origin_branch = "test1"  # TODO get from variables
     repo = Repo("/Users/arnold.dajao/Documents/OldTask/Temp/piSandBox")  # TODO get from variables
     o = repo.remotes.origin
     o.pull()
+    commit_dev = repo.commit(origin_branch)
 
-    commit_dev = repo.commit("test1")  # TODO get from variables
     commit_origin_dev = repo.commit(MAIN_REPO)
     diff_index = commit_origin_dev.diff(commit_dev)
 
@@ -83,6 +95,11 @@ if __name__ == "__main__":
             new_version_incr = increment_version(current_version)
 
             update_version_classifiers(version_file, current_version, new_version_incr, classifier)
+
+        ver_changes_changes = ', '.join(classifiers_updates)
+        repo_commit_message = f'automation updated versions for {ver_changes_changes}'
+        git_push(repo, repo_commit_message, origin_branch)
+
     else:
         # logger.warning("No version update needed")
         print("No version update needed")
