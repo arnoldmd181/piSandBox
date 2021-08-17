@@ -56,8 +56,8 @@ for classifier in classifiers_updates:
     # Read Version file
     exec(open(version_file).read())
 
-    classifiers_version = __version__
+    current_version = __version__
     # update version
     new_version_incr = increment_version(version_file)
 
-    update_version_classifiers(version_file, classifiers_version, new_version_incr, classifier)
+    update_version_classifiers(version_file, current_version, new_version_incr, classifier)
