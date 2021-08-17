@@ -11,7 +11,7 @@ PWD = os.path.abspath(os.path.dirname(__file__))
 MAIN_REPO = "origin/dev"
 CLASSIFIERS = {"phishing_common", "domain_classifier", "filename_classifier", "path_classifier",
                "tls_certificate_classifier"}  # TODO does need to be in config file?
-EXCLUSIONS = {"README.md"}  # TODO does need to be in config file?
+EXCLUSIONS = {"readme.md"}  # needs to be in lower case TODO does need to be in config file?
 
 
 def increment_version(version):
@@ -65,7 +65,7 @@ if __name__ == "__main__":
         #     # logger.fatal("_version.py was changed")
         #     print("_version.py was changed")
         #     exit(1)
-        if str(path_changed) in CLASSIFIERS and str(file_changed) not in CLASSIFIERS:
+        if str(path_changed) in CLASSIFIERS and str(file_changed) not in EXCLUSIONS:
             print(f"file added: {full_filename}")
             classifiers_updates.add(path_changed)
 
