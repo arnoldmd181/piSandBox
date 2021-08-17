@@ -58,6 +58,6 @@ for classifier in classifiers_updates:
 
     current_version = __version__
     # update version
-    new_version_incr = increment_version(version_file)
+    new_version_incr = increment_version(current_version)
 
     update_version_classifiers(version_file, current_version, new_version_incr, classifier)
