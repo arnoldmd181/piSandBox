@@ -1,6 +1,7 @@
 import os
 from git import Repo
 import re
+import argparse
 
 # import logging
 # from phishing_common.logger import LOGGER_NAME, initialize_logging
@@ -42,24 +43,21 @@ def update_version_classifiers(file_name, version, new_version, update_classifie
         update_version_deps(setup_file, version, new_version)
 
 
-def git_push(repository, commit_message, origin):
-    try:
-        repository.git.add(update=True)
-        repository.index.commit(commit_message)
-        origin = repository.remote(name=origin)
-        origin.push()
-
-    except:
-        print('Some error occured while pushing the code')
-
-
 if __name__ == "__main__":
+    print("Running Automation Deployment")
     # initialize_logging()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--workspace', type=str, required=True)
+    parser.add_argument('--branch', type=str, required=True)
+    # parser.add_argument('-w', '--workspace', dest="config_file")
+    args = parser.parse_args()
 
-    branch = "dc-test"  # TODO get from variables
+    branch = args.branch  # TODO get from variables
     origin_branch = f'origin/{branch}'
-    repo = Repo("/Users/arnold.dajao/Documents/OldTask/Temp/piSandBox")  # TODO get from variables
+    repo = Repo(args.workspace)  # TODO get from variables
     o = repo.remotes.origin
+
+    # pull all origin
     o.pull()
     commit_dev = repo.commit(branch)
 
@@ -99,7 +97,6 @@ if __name__ == "__main__":
 
         ver_changes_changes = ', '.join(classifiers_updates)
         repo_commit_message = f'automation updated versions for {ver_changes_changes}'
-        # git_push(repo, repo_commit_message, origin_branch)
 
         try:
             repo.git.add(update=True)
