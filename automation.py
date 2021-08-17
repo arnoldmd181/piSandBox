@@ -60,12 +60,13 @@ if __name__ == "__main__":
         full_filename = diff_item.a_path
         path_changed = re.split(r'\/', full_filename)[0].lower()
         file_changed = re.split(r'\/', full_filename)[-1].lower()
+        print(f"file updated: {full_filename}")
         # if str(file_changed) == "_version.py":
         #     # logger.fatal("_version.py was changed")
         #     print("_version.py was changed")
         #     exit(1)
         if str(path_changed) in CLASSIFIERS and str(file_changed) not in CLASSIFIERS:
-            print(f"file updated: {full_filename}")
+            print(f"file added: {full_filename}")
             classifiers_updates.add(path_changed)
 
     if classifiers_updates:
