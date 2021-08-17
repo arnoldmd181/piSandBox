@@ -45,7 +45,7 @@ pipeline {
                     echo "Multiline shell steps works too"
                     ls -lah
                 '''
-                sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} ${GIT_BRANCH}"
+                sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${GIT_BRANCH}"
 //                 sh "bash ${WORKSPACE}/build_scripts/test.sh domain_classifier"
                 echo "--------Flake8 ${1}--------"
 //                 sh "pip3 install flake8"
