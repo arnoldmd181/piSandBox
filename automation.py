@@ -7,7 +7,7 @@ PWD = os.path.abspath(os.path.dirname(__file__))
 MAIN_REPO = "origin/dev"
 CLASSIFIERS = {"phishing_common", "domain_classifier", "filename_classifier", "path_classifier",
                "tls_certificate_classifier"}  # TODO does need to be in config file?
-
+EXCLUSIONS = {"README.md"}  # TODO does need to be in config file?
 
 def increment_version(version):
     pattern = re.compile("""(\\d\\.\\d\\.)(\\d)(.*)""")
@@ -28,8 +28,8 @@ def update_version_classifiers(file_name, version, new_version, update_classifie
     update_version_deps(file_name, version, new_version)
 
     if update_classifier == "phishing_common":
-        classifiers = CLASSIFIERS.pop()
-        for classifier_setup in classifiers:
+        CLASSIFIERS.remove("phishing_common")
+        for classifier_setup in CLASSIFIERS:
             setup_file = PWD + f'/{classifier_setup}/setup.py'
             update_version_deps(setup_file, version, new_version)
     elif update_classifier == "domain_classifier":
@@ -46,9 +46,11 @@ diff_index = commit_origin_dev.diff(commit_dev)
 classifiers_updates = set()
 
 for diff_item in diff_index:
-    path = Path(diff_item.a_path).parent
-    if str(path).lower() in CLASSIFIERS:
-        classifiers_updates.add(path)
+    # path = Path(diff_item.a_path).parent
+    path_changed = re.split(r'\/', diff_item.a_path)[0].lower()
+    file_changed = re.split(r'\/', diff_item.a_path)[-1].lower()
+    if str(path_changed) in CLASSIFIERS and str(file_changed) not in CLASSIFIERS:
+        classifiers_updates.add(path_changed)
 
 for classifier in classifiers_updates:
     print(classifier)
