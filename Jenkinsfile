@@ -29,7 +29,7 @@ pipeline {
           steps {
             script {
               sh """
-              pip3 install git
+              pip3 install GitPython
               """
             }
           }
