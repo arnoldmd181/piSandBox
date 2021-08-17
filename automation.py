@@ -38,7 +38,6 @@ def update_version_classifiers(file_name, version, new_version, update_classifie
         update_version_deps(setup_file, version, new_version)
 
 
-
 repo = Repo("/Users/arnold.dajao/Documents/OldTask/Temp/piSandBox")  # TODO get from variables
 
 commit_dev = repo.commit("test1")  # TODO get from variables
@@ -53,8 +52,7 @@ for diff_item in diff_index:
         classifiers_updates.add(path)
 
 
-
-for classifier in classifiers_updates
+for classifier in classifiers_updates:
     print(classifier)
 
     version_file = PWD + f'/{classifier}/{classifier}/_version.py'
