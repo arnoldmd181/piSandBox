@@ -24,7 +24,16 @@ pipeline {
         }
      }
     stages {
-
+        stage('Setup') { // Install any dependencies you need to perform testing
+      steps {
+        script {
+          sh """
+          pip install git
+          """
+        }
+      }
+    }
+    }
         stage("test") {
 //           withEnv(["HOME=${env.WORKSPACE}"]) {
             steps {
@@ -42,7 +51,8 @@ pipeline {
 //                 sh "flake8 ${WORKSPACE}/domain_classifier"
             }
 //            }
-        }
+
+
         stage("autopep") {
             steps {
                 script {
