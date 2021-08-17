@@ -46,6 +46,7 @@ import git
 
 from git import Repo
 from pathlib import Path
+import re
 
 # rorepo is a Repo instance pointing to the git-python repository.
 # For all you know, the first argument to Repo is a path to the repository
@@ -66,5 +67,32 @@ for diff_item in diff_index:
     if str(path).lower() in classifiers:
         classifiers_updates.add(path)
 
-
+FileName = '/Users/arnold.dajao/Documents/OldTask/Temp/piSandBox/domain_classifier/domain_classifier/_version.py'
 print(classifiers_updates)
+
+here = os.path.abspath(os.path.dirname("../domain_classifier"))
+# exec(open(os.path('../domain_classifier/domain_classifier/_version.py')).read())
+# exec(open(os.path.join(here, '/domain_classifier/domain_classifier/_version.py')).read())
+exec(
+    open('/Users/arnold.dajao/Documents/OldTask/Temp/piSandBox/domain_classifier/domain_classifier/_version.py').read())
+version = __version__
+
+
+def increment_version(version):
+    pattern = re.compile("""(\\d\\.\\d\\.)(\\d)(.*)""")
+    matches = pattern.match(version)
+    new_version = matches.group(1) + str(int(matches.group(2)) + 1) + matches.group(3)
+    return new_version
+
+
+# update dependency version or update _version.py
+def update_version_deps(FileName, version, new_version):
+    with open(FileName) as f:
+        newText = f.read().replace(version, new_version)
+    with open(FileName, "w") as f:
+        f.write(newText)
+
+
+new_version = increment_version(FileName)
+
+update_version_deps(FileName, version, new_version)
