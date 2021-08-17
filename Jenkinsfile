@@ -31,6 +31,7 @@ pipeline {
               sh """
               pip3 install GitPython
               """
+              sh 'printenv'
             }
           }
         }
