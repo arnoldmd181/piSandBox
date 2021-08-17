@@ -23,17 +23,18 @@ pipeline {
             '''.stripIndent()
         }
      }
-    stages {
-        stage('Setup') { // Install any dependencies you need to perform testing
-      steps {
-        script {
-          sh """
-          pip install git
-          """
+        stages {
+        stages {
+            stage('Setup') { // Install any dependencies you need to perform testing
+          steps {
+            script {
+              sh """
+              pip install git
+              """
+            }
+          }
         }
-      }
-    }
-    }
+
         stage("test") {
 //           withEnv(["HOME=${env.WORKSPACE}"]) {
             steps {
