@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
     # pull all origin
     o.pull()
-    commit_dev = repo.commit(branch)
+    commit_dev = repo.commit(origin_branch)
 
     commit_origin_dev = repo.commit(MAIN_REPO)
     diff_index = commit_origin_dev.diff(commit_dev)
