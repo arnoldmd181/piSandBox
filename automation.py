@@ -56,11 +56,12 @@ def git_push(repository, commit_message, origin):
 if __name__ == "__main__":
     # initialize_logging()
 
-    origin_branch = "test1"  # TODO get from variables
+    branch = "test1"  # TODO get from variables
+    origin_branch = f'origin/{branch}'
     repo = Repo("/Users/arnold.dajao/Documents/OldTask/Temp/piSandBox")  # TODO get from variables
     o = repo.remotes.origin
     o.pull()
-    commit_dev = repo.commit(origin_branch)
+    commit_dev = repo.commit(branch)
 
     commit_origin_dev = repo.commit(MAIN_REPO)
     diff_index = commit_origin_dev.diff(commit_dev)
