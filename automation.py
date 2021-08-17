@@ -1,6 +1,4 @@
 import os
-
-import switch as switch
 from git import Repo
 from pathlib import Path
 import re
@@ -22,11 +20,11 @@ def update_version_deps(file_name, version, new_version):
     with open(file_name) as f:
         new_text = f.read().replace(version, new_version)
     with open(file_name, "w") as f:
-        f.write(file_name)
+        f.write(new_text)
+
 
 # pattern matching similar to scala is only available in 3.10
 def update_version_classifiers(file_name, version, new_version, update_classifier):
-
     update_version_deps(file_name, version, new_version)
 
     if update_classifier == "phishing_common":
@@ -50,7 +48,6 @@ for diff_item in diff_index:
     path = Path(diff_item.a_path).parent
     if str(path).lower() in CLASSIFIERS:
         classifiers_updates.add(path)
-
 
 for classifier in classifiers_updates:
     print(classifier)
