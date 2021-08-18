@@ -73,8 +73,7 @@ pipeline {
 	                git status
                     git add .
                     git commit -m "automation added updated versions"
-                    git remote set-url origin git@github.com:arnoldmd181/piSandBox.git
-	                git push origin HEAD:dc-test2
+	                git push origin HEAD:dc-test
 	              '''
 	        }
 	    }
