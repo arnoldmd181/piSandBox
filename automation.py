@@ -2,7 +2,7 @@ import os
 from git import Repo
 import re
 import argparse
-import subprocess as cmd
+import subprocess
 # import logging
 # from phishing_common.logger import LOGGER_NAME, initialize_logging
 
@@ -118,12 +118,12 @@ if __name__ == "__main__":
             # cp = cmd.run("file path", check=True, shell=True)
             # print("cp", cp)
             print("git status:")
-            cmd.run("git status", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.run("git status", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-            cmd.run('git add .', check=True, shell=True)
-            gitcom =cmd.run(f'git commit -m \"{repo_commit_message}\"', check=True, shell=True)
+            subprocess.run('git add .', check=True, shell=True)
+            gitcom =subprocess.run(f'git commit -m \"{repo_commit_message}\"', check=True, shell=True)
             print("gitpush")
-            cmd.run("git push origin HEAD:dc-test -v", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.run("git push origin HEAD:dc-test -v", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
             print("Success")
         except Exception as e:
