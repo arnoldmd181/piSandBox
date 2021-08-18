@@ -84,7 +84,7 @@ if __name__ == "__main__":
         if str(file_changed) == "_version.py":
             # logger.fatal("_version.py was changed")
             print("_version.py was changed")
-            exit(1)
+            exit(-1)
         if str(path_changed) in CLASSIFIERS and str(file_changed) not in EXCLUSIONS:
             print(f"file added: {full_filename}")
             classifiers_updates.add(path_changed)
@@ -110,7 +110,7 @@ if __name__ == "__main__":
         try:
             repo.git.add(update=True)
             repo.index.commit(repo_commit_message)
-            origin = repo.remote(name=origin_branch)
+            origin = repo.remote(name='origin/dc-test')
             origin.push()
             # repo.git.checkout(origin_branch)
             # repo.remotes.origin.push()
