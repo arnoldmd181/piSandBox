@@ -57,11 +57,11 @@ if __name__ == "__main__":
     repo = Repo(args.workspace)  # TODO get from variables
     o = repo.remotes.origin
 
+    commit_origin_dev = repo.commit(MAIN_REPO)
     # pull all origin
     o.pull()
     commit_dev = repo.commit(origin_branch)
 
-    commit_origin_dev = repo.commit(MAIN_REPO)
     diff_index = commit_origin_dev.diff(commit_dev)
 
     classifiers_updates = set()
