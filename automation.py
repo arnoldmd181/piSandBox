@@ -2,7 +2,7 @@ import os
 from git import Repo
 import re
 import argparse
-import subprocess
+
 # import logging
 # from phishing_common.logger import LOGGER_NAME, initialize_logging
 
@@ -18,8 +18,8 @@ EXCLUSIONS = {"readme.md"}  # needs to be in lower case TODO does need to be in 
 def increment_version(version):
     pattern = re.compile("""(\\d\\.\\d\\.)(\\d)(.*)""")
     matches = pattern.match(version)
-    return matches.group(1) + str(int(matches.group(2)) + 1) + matches.group(3)
-
+    # return matches.group(1) + str(int(matches.group(2)) + 1) + matches.group(3)
+    return "test." + matches.group(1) + str(int(matches.group(2)) + 1) + matches.group(3)  # TODO Delete for Testing
 
 # update dependency version or update _version.py
 def update_version_deps(file_name, version, new_version):
@@ -42,9 +42,21 @@ def update_version_classifiers(file_name, version, new_version, update_classifie
         setup_file = PWD + f'/tls_certificate_classifier/setup.py'
         update_version_deps(setup_file, version, new_version)
 
+def push_changes(curr_branch):
+    try:
+        head_branch = f'HEAD:{curr_branch}'
+        repo.git.add(update=True)
+        repo.git.commit(m=repo_commit_message)
+        repo.git.push("origin", "HEAD:dc-test")
+
+    except Exception as e:
+        # logger.warning(f'Failed to read ETDR password so pymysql will not be set up correctly\n{e}')
+        print(f'Failed to read push to remote \n{e}')
+        exit(-1)
+
 
 if __name__ == "__main__":
-    print("Running Automation Deployment")
+    # print("Running Automation Deployment")
     # initialize_logging()
 
     #initialized github creds
@@ -63,15 +75,13 @@ if __name__ == "__main__":
     o = repo.remotes.origin
     # pull all origin
     # o.pull()
-
     commit_origin_dev = repo.commit(MAIN_REPO)
-    # repo_branches = repo.heads #r.heads  # or it's alias: r.branches
-    # repo_heads_names = [h.name for h in repo_branches]
-    print("remote branches")
-    remote_refs = repo.remote().refs
 
-    for refs in remote_refs:
-        print(refs.name)
+    # print("remote branches")
+    # remote_refs = repo.remote().refs
+    #
+    # for refs in remote_refs:
+    #     print(refs.name)
 
     print(f'getting commit_dev')
     commit_dev = repo.commit(origin_branch)
@@ -110,44 +120,13 @@ if __name__ == "__main__":
             current_version = __version__
             # update version
             new_version_incr = increment_version(current_version)
-
             update_version_classifiers(version_file, current_version, new_version_incr, classifier)
 
         ver_changes_changes = ', '.join(classifiers_updates)
         repo_commit_message = f'automation updated versions for {ver_changes_changes}'
-        # try:
-        #     # cp = cmd.run("file path", check=True, shell=True)
-        #     # print("cp", cp)
-        #     # print("git status:")
-        #     # subprocess.run("git status", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        #     #
-        #     # subprocess.run('git add .', check=True, shell=True)
-        #     # gitcom =subprocess.run(f'git commit -m \"{repo_commit_message}\"', check=True, shell=True)
-        #     # print("gitpush")
-        #     # subprocess.run("git push origin HEAD:dc-test -v", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        #     #
-        #     # print("Success")
-        # except Exception as e:
-        #     # logger.warning(f'Failed to read ETDR password so pymysql will not be set up correctly\n{e}')
-        #     print(f'Failed to read push to remote \n{e}')
-        #     exit(-1)
-        # except:
-        #     print("Error git automation")
 
-        try:
+        push_changes(branch)
 
-            repo.git.add(update=True)
-            repo.git.commit(m=repo_commit_message)
-            repo.git.push("origin", "HEAD:dc-test")
-        #     # origin = repo.remote(name='origin/dc-test')
-        #     # origin.push()
-        #     # repo.git.checkout(origin_branch)
-        #     # repo.remotes.origin.push()
-        #
-        except Exception as e:
-            # logger.warning(f'Failed to read ETDR password so pymysql will not be set up correctly\n{e}')
-            print(f'Failed to read push to remote \n{e}')
-            exit(-1)
     else:
         # logger.warning("No version update needed")
         print("No version update needed")
