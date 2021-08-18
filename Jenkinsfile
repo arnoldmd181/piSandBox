@@ -30,7 +30,7 @@ pipeline {
                     sh 'printenv'
                 }
             }
-          }
+
         }
 	    stage('Checkout') {
 	      	steps {
