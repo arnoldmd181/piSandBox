@@ -49,6 +49,7 @@ pipeline {
                     git --version
                     git status
                     git log
+                    git fetch --all
                     git branch
                     git branch -r
                     git checkout dc-test
