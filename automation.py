@@ -60,9 +60,13 @@ if __name__ == "__main__":
     o.pull()
 
     commit_origin_dev = repo.commit(MAIN_REPO)
-    repo_branches = repo.heads #r.heads  # or it's alias: r.branches
-    repo_heads_names = [h.name for h in repo_branches]
-    print(repo_heads_names)
+    # repo_branches = repo.heads #r.heads  # or it's alias: r.branches
+    # repo_heads_names = [h.name for h in repo_branches]
+    print("remote branches")
+    remote_refs = repo.remote().refs
+
+    for refs in remote_refs:
+        print(refs.name)
 
     print(f'getting commit_dev')
     commit_dev = repo.commit(repo.active_branch)
