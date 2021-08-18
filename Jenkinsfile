@@ -9,10 +9,10 @@ pipeline {
            git credentialsId: 'arnold.dajao@ironnetcybersecurity.com', url: 'https://github.com/arnoldmd181/piSandBox.git'
            // Do a ls -lart to view all the files are cloned. It will be clonned. This is just for you to be sure about it.
            print("ls")
-           sh "ls -lart ./*"
+//            sh "ls -lart ./*"
            sh """
                 git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
-                git fetch --all
+                git fetch
             """
            // List all branches in your repo.
            sh "git branch -a"
