@@ -38,12 +38,12 @@ pipeline {
 		           // The below will clone your repo and will be checked out to master branch by default.
 		           sh "git status"
 		           print("cloning repo")
-		           git credentialsId: 'TestGitToken1', url: 'https://github.com/arnoldmd181/piSandBox.git'
+// 		           git credentialsId: 'TestGitToken1', url: 'https://github.com/arnoldmd181/piSandBox.git'
 		           // Do a ls -lart to view all the files are cloned. It will be clonned. This is just for you to be sure about it.
 		           print("ls")
-		           sh """
-		                git fetch --all
-		            """
+// 		           sh """
+// 		                git fetch --all
+// 		            """
 		            //                 git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
 		            sh "git status"
 
@@ -51,7 +51,7 @@ pipeline {
 		           sh "git branch -a"
 
 		           // Checkout to a specific branch in your repo.
-		           sh "git checkout remotes/origin/dc-test"
+// 		           sh "git checkout remotes/origin/dc-test"
 		            sh "git status"
 		        }
 	      	}
