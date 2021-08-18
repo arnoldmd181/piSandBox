@@ -112,6 +112,7 @@ if __name__ == "__main__":
             repo.index.commit(repo_commit_message)
             # origin = repo.remote(name=origin_branch)
             # origin.push()
+            repo.git.checkout('dc-test')
             repo.remotes.origin.push()
 
         except Exception as e:
