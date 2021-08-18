@@ -56,10 +56,15 @@ if __name__ == "__main__":
     origin_branch = f'origin/{branch}'
     repo = Repo(args.workspace)  # TODO get from variables
     o = repo.remotes.origin
-
-    commit_origin_dev = repo.commit(MAIN_REPO)
     # pull all origin
     o.pull()
+
+    commit_origin_dev = repo.commit(MAIN_REPO)
+    repo_branches = repo.branches #r.heads  # or it's alias: r.branches
+    repo_heads_names = [h.name for h in repo_branches]
+    print(repo_heads_names)
+
+    print(f'getting commit_dev')
     commit_dev = repo.commit(origin_branch)
 
     diff_index = commit_origin_dev.diff(commit_dev)
