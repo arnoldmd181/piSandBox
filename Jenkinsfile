@@ -63,6 +63,17 @@ pipeline {
 	            sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME}"
 	        }
 	    }
+	   stage("push") {
+	        steps {
+	            echo '> Running push ...'
+	            sh '''
+	                echo "Multiline shell steps works too"
+	                git status
+	                git log --oneline
+	                git push origin HEAD:dc-test
+	              '''
+	        }
+	    }
     }
 }
 
