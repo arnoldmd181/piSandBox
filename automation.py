@@ -120,7 +120,7 @@ if __name__ == "__main__":
             cmd.run('git add .', check=True, shell=True)
             gitcom =cmd.run(f'git commit -m \"{repo_commit_message}\"', check=True, shell=True)
             print("gitcom", gitcom)
-            gitpush = cmd.run("git push origin dc-test -v", check=True, shell=True)
+            gitpush = cmd.run("git push origin/dc-test -v", check=True, shell=True)
             print("gitpush", gitpush)
             print("Success")
         except Exception as e:
