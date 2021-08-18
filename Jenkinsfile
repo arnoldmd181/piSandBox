@@ -18,7 +18,7 @@ pipeline {
            sh "git branch -a"
 
            // Checkout to a specific branch in your repo.
-           sh "git checkout origin dc-test"
+           sh "git checkout remotes/origin/dc-test"
           }
        }
     }
