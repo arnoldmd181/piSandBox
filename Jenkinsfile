@@ -11,9 +11,8 @@ pipeline {
            print("ls")
 //            sh "ls -lart ./*"
            sh """
-                git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
-                git fetch --replace-all
-
+//                 git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+                git fetch --all
             """
            // List all branches in your repo.
            sh "git branch -a"
