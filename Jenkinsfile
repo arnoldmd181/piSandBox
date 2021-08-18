@@ -49,6 +49,8 @@ pipeline {
                     git --version
                     git status
                     git log
+                    git branch
+                    git branch -r
                     git checkout dc-test
                 '''
                 sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME}"
