@@ -110,15 +110,15 @@ if __name__ == "__main__":
         try:
             repo.git.add(update=True)
             repo.index.commit(repo_commit_message)
-            # origin = repo.remote(name=origin_branch)
-            # origin.push()
-            repo.git.checkout(origin_branch)
-            repo.remotes.origin.push()
+            origin = repo.remote(name=origin_branch)
+            origin.push()
+            # repo.git.checkout(origin_branch)
+            # repo.remotes.origin.push()
 
         except Exception as e:
             # logger.warning(f'Failed to read ETDR password so pymysql will not be set up correctly\n{e}')
             print(f'Failed to read push to remote \n{e}')
-            exit(1)
+            exit(-1)
     else:
         # logger.warning("No version update needed")
         print("No version update needed")
