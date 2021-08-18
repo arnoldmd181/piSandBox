@@ -52,18 +52,19 @@ pipeline {
                     git branch
                     git branch -r
                     git log --oneline
-                    git branch dc-test
-                    git checkout dc-test
                 '''
+//                     git branch dc-test
+//                     git checkout dc-test
                 sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME}"
 //                 sh "bash ${WORKSPACE}/build_scripts/test.sh domain_classifier"
                 sh '''
                     git status
                     git log --oneline
-                    git add .
-                    git commit -m "automation added updated versions"
-                    git push --set-upstream origin dc-test
+
                 '''
+//                     git add .
+//                     git commit -m "automation added updated versions"
+//                     git push --set-upstream origin dc-test
                 echo "--------Flake8 ${1}--------"
 //                 sh "pip3 install flake8"
 //                 sh "flake8 ${WORKSPACE}/domain_classifier"
