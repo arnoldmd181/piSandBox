@@ -48,6 +48,8 @@ pipeline {
                     ls -lah
                     git --version
                     git status
+                    git log
+                    git checkout dc-test
                 '''
                 sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME}"
 //                 sh "bash ${WORKSPACE}/build_scripts/test.sh domain_classifier"
