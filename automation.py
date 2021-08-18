@@ -114,22 +114,22 @@ if __name__ == "__main__":
 
         ver_changes_changes = ', '.join(classifiers_updates)
         repo_commit_message = f'automation updated versions for {ver_changes_changes}'
-        try:
-            # cp = cmd.run("file path", check=True, shell=True)
-            # print("cp", cp)
-            print("git status:")
-            subprocess.run("git status", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-            subprocess.run('git add .', check=True, shell=True)
-            gitcom =subprocess.run(f'git commit -m \"{repo_commit_message}\"', check=True, shell=True)
-            print("gitpush")
-            subprocess.run("git push origin HEAD:dc-test -v", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-            print("Success")
-        except Exception as e:
-            # logger.warning(f'Failed to read ETDR password so pymysql will not be set up correctly\n{e}')
-            print(f'Failed to read push to remote \n{e}')
-            exit(-1)
+        # try:
+        #     # cp = cmd.run("file path", check=True, shell=True)
+        #     # print("cp", cp)
+        #     # print("git status:")
+        #     # subprocess.run("git status", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        #     #
+        #     # subprocess.run('git add .', check=True, shell=True)
+        #     # gitcom =subprocess.run(f'git commit -m \"{repo_commit_message}\"', check=True, shell=True)
+        #     # print("gitpush")
+        #     # subprocess.run("git push origin HEAD:dc-test -v", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        #     #
+        #     # print("Success")
+        # except Exception as e:
+        #     # logger.warning(f'Failed to read ETDR password so pymysql will not be set up correctly\n{e}')
+        #     print(f'Failed to read push to remote \n{e}')
+        #     exit(-1)
         # except:
         #     print("Error git automation")
 
