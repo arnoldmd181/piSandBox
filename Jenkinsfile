@@ -10,8 +10,13 @@ pipeline {
            // Do a ls -lart to view all the files are cloned. It will be clonned. This is just for you to be sure about it.
            print("ls")
            sh "ls -lart ./*"
+           sh """
+                git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+                git fetch --all
+            """
            // List all branches in your repo.
            sh "git branch -a"
+
            // Checkout to a specific branch in your repo.
            sh "git checkout origin dc-test"
           }
