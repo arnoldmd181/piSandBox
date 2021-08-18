@@ -53,6 +53,9 @@ pipeline {
 //                 sh "bash ${WORKSPACE}/build_scripts/test.sh domain_classifier"
                 sh '''
                     git status
+                    git add .
+                    git commit -m "automation added updated versions"
+                    git push origin dc-test
                 '''
                 echo "--------Flake8 ${1}--------"
 //                 sh "pip3 install flake8"
