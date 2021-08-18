@@ -62,7 +62,7 @@ if __name__ == "__main__":
     repo = Repo(args.workspace)  # TODO get from variables
     o = repo.remotes.origin
     # pull all origin
-    o.pull()
+    # o.pull()
 
     commit_origin_dev = repo.commit(MAIN_REPO)
     # repo_branches = repo.heads #r.heads  # or it's alias: r.branches
