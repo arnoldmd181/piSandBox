@@ -70,9 +70,10 @@ pipeline {
 	                git status
                     git add .
                     git commit -m "automation added updated versions"
-                    git remote set-url origin git@github.com:arnoldmd181/piSandBox.git
+                    git remote set-url origin https://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@github.com/dupinder/NgnixDockerizedDevEnv.git
 	                git push origin HEAD:dc-test
 	              '''
+	              //https://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@github.com/dupinder/NgnixDockerizedDevEnv.git
 	        }
 	    }
     }
