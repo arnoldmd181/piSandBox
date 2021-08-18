@@ -117,13 +117,14 @@ if __name__ == "__main__":
         try:
             # cp = cmd.run("file path", check=True, shell=True)
             # print("cp", cp)
-            cp = cmd.run("git status", check=True, shell=True)
-            print("cp", cp)
+            print("git status:")
+            cmd.run("git status", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
             cmd.run('git add .', check=True, shell=True)
             gitcom =cmd.run(f'git commit -m \"{repo_commit_message}\"', check=True, shell=True)
-            print("gitcom", gitcom)
-            gitpush = cmd.run("git push origin HEAD:dc-test -v", check=True, shell=True)
-            print("gitpush", gitpush)
+            print("gitpush")
+            cmd.run("git push origin HEAD:dc-test -v", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
             print("Success")
         except Exception as e:
             # logger.warning(f'Failed to read ETDR password so pymysql will not be set up correctly\n{e}')
