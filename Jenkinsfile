@@ -31,6 +31,8 @@ pipeline {
               sh """
               pip3 install GitPython
               """
+              env.GH_URL = GIT_URL.substring(0, GIT_URL.size() - 4)
+              env.COMMIT_URL = GIT_BRANCH == "dev" ? "${GH_URL}/commit/${GIT_COMMIT}" : "${GH_URL}/pull/${GIT_BRANCH.substring(3, GIT_BRANCH.size())}/commits/${GIT_COMMIT}"
 //               sh """apt-get update && apt-get install -y git"""
               sh 'printenv'
             }
