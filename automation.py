@@ -46,6 +46,11 @@ def update_version_classifiers(file_name, version, new_version, update_classifie
 if __name__ == "__main__":
     print("Running Automation Deployment")
     # initialize_logging()
+
+    #initialized github creds
+    os.system("git config --global user.name \"Arnold Dajao\"")
+    os.system("git config --global user.email \"arnold.dajao@ironnetcybersecurity.com\"")
+
     parser = argparse.ArgumentParser()
     parser.add_argument('--workspace', type=str, required=True)
     parser.add_argument('--branch', type=str, required=True)
