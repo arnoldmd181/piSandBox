@@ -82,8 +82,8 @@ if __name__ == "__main__":
 
     # repo.git.checkout(origin_branch)
     print("checkout branch:")
-    repo.git.branch('dc-test')
-    repo.git.checkout('dc-test')
+    repo.git.branch('dc-test2')
+    repo.git.checkout('dc-test2')
     for diff_item in diff_index:
         # path = Path(diff_item.a_path).parent
         full_filename = diff_item.a_path
@@ -138,7 +138,7 @@ if __name__ == "__main__":
 
             repo.git.add(update=True)
             repo.git.commit(m=repo_commit_message)
-            repo.git.push("origin", "dc-test")
+            repo.git.push("origin", "dc-test2")
             # origin = repo.remote(name='origin/dc-test')
             # origin.push()
             # repo.git.checkout(origin_branch)

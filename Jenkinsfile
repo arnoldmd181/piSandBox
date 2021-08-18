@@ -60,7 +60,6 @@ pipeline {
                 sh '''
                     git status
                     git log --oneline
-
                 '''
 //                     git add .
 //                     git commit -m "automation added updated versions"
