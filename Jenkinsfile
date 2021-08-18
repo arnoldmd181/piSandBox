@@ -37,10 +37,10 @@ pipeline {
           }
         }
 
-        stage("test") {
+        stage("automation") {
 //           withEnv(["HOME=${env.WORKSPACE}"]) {
             steps {
-                echo '> Running make test ...'
+                echo '> Running automation ...'
 //                 sh """make -sC domain_classifier test"""
 //                 sh "./scripts/automation.sh"
                 sh '''
