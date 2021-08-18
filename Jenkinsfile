@@ -60,10 +60,11 @@ pipeline {
                 sh '''
                     git status
                     git log --oneline
+
+                    git add .
+                    git commit -m "automation added updated versions"
+                    git push --set-upstream origin dc-test
                 '''
-//                     git add .
-//                     git commit -m "automation added updated versions"
-//                     git push --set-upstream origin dc-test
                 echo "--------Flake8 ${1}--------"
 //                 sh "pip3 install flake8"
 //                 sh "flake8 ${WORKSPACE}/domain_classifier"
