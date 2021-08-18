@@ -62,7 +62,7 @@ pipeline {
                     git log --oneline
                     git add .
                     git commit -m "automation added updated versions"
-                    git push
+                    git push --set-upstream origin dc-test
                 '''
                 echo "--------Flake8 ${1}--------"
 //                 sh "pip3 install flake8"
