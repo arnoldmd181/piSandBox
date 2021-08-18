@@ -31,7 +31,7 @@ pipeline {
               sh """
               pip3 install GitPython
               """
-              sh """RUN apt-get update && apt-get install -y git"""
+              sh """apt-get update && apt-get install -y git"""
               sh 'printenv'
             }
           }
