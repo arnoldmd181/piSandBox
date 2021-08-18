@@ -109,7 +109,7 @@ if __name__ == "__main__":
 
         try:
             repo.git.add(update=True)
-            repo.index.commit(repo_commit_message)
+            repo.git.commit(repo_commit_message)
             repo.git.push("origin", "dc-test")
             # origin = repo.remote(name='origin/dc-test')
             # origin.push()
