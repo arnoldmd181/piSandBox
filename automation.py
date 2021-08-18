@@ -54,7 +54,7 @@ def push_changes(curr_branch):
         print(f'Failed to read push to remote \n{e}')
         exit(-1)
 
-def build_automation ():
+# def build_automation ():
 
 
 if __name__ == "__main__":
@@ -87,7 +87,6 @@ if __name__ == "__main__":
 
     print(f'getting commit_dev')
     commit_dev = repo.commit(origin_branch)
-
     diff_index = commit_origin_dev.diff(commit_dev)
 
     classifiers_updates = set()
@@ -111,7 +110,6 @@ if __name__ == "__main__":
             classifiers_updates.add(path_changed)
 
     if classifiers_updates:
-
         for classifier in classifiers_updates:
             print(classifier)  # TODO Remove
 
