@@ -48,18 +48,18 @@ pipeline {
                     ls -lah
                     git --version
                     git status
-                    git log --oneline
-                    git log
                     git fetch --all
                     git branch
                     git branch -r
                     git log --oneline
+                    git branch dc-test
                     git checkout dc-test
                 '''
                 sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME}"
 //                 sh "bash ${WORKSPACE}/build_scripts/test.sh domain_classifier"
                 sh '''
                     git status
+                    git log --oneline
                     git add .
                     git commit -m "automation added updated versions"
                     git push
