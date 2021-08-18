@@ -65,7 +65,7 @@ if __name__ == "__main__":
     print(repo_heads_names)
 
     print(f'getting commit_dev')
-    commit_dev = repo.commit(origin_branch)
+    commit_dev = repo.commit(repo.active_branch)
 
     diff_index = commit_origin_dev.diff(commit_dev)
 
