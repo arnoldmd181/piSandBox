@@ -80,6 +80,9 @@ if __name__ == "__main__":
 
     classifiers_updates = set()
 
+    # repo.git.checkout(origin_branch)
+    print("checkout branch:")
+    repo.git.branch('"dc-test"')
     for diff_item in diff_index:
         # path = Path(diff_item.a_path).parent
         full_filename = diff_item.a_path
@@ -113,6 +116,7 @@ if __name__ == "__main__":
         repo_commit_message = f'automation updated versions for {ver_changes_changes}'
 
         try:
+
             repo.git.add(update=True)
             repo.git.commit(m=repo_commit_message)
             repo.git.push("origin", "dc-test")
