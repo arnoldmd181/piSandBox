@@ -115,7 +115,9 @@ if __name__ == "__main__":
         ver_changes_changes = ', '.join(classifiers_updates)
         repo_commit_message = f'automation updated versions for {ver_changes_changes}'
         try:
-            cp = cmd.run("file path", check=True, shell=True)
+            # cp = cmd.run("file path", check=True, shell=True)
+            # print("cp", cp)
+            cp = cmd.run("git status", check=True, shell=True)
             print("cp", cp)
             cmd.run('git add .', check=True, shell=True)
             gitcom =cmd.run(f'git commit -m \"{repo_commit_message}\"', check=True, shell=True)
