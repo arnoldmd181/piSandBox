@@ -58,7 +58,6 @@ pipeline {
 	           sh '''
 	                    echo "Multiline shell steps works too"
 	                    git status
-	                    git log --oneline
 	                '''
 	            sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME}"
 	        }
@@ -69,7 +68,8 @@ pipeline {
 	            sh '''
 	                echo "Multiline shell steps works too"
 	                git status
-	                git log --oneline
+                    git add .
+                    git commit -m "automation added updated versions"
 	                git push origin HEAD:dc-test
 	              '''
 	        }
