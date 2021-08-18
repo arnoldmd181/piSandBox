@@ -37,7 +37,7 @@ pipeline {
 		        script {
 		           // The below will clone your repo and will be checked out to master branch by default.
 		           print("cloning repo")
-		           git credentialsId: 'arnold.dajao@ironnetcybersecurity.com', url: 'git@github.com:arnoldmd181/piSandBox.git'
+		           git credentialsId: 'arnold.dajao@ironnetcybersecurity.com', url: 'https://github.com/arnoldmd181/piSandBox.git'
 		           // Do a ls -lart to view all the files are cloned. It will be clonned. This is just for you to be sure about it.
 		           print("ls")
 		           sh """
@@ -70,6 +70,7 @@ pipeline {
 	                git status
                     git add .
                     git commit -m "automation added updated versions"
+                    git remote set-url origin git@github.com:arnoldmd181/piSandBox.git
 	                git push origin HEAD:dc-test
 	              '''
 	        }
