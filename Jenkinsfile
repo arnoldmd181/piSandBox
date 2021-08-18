@@ -12,7 +12,8 @@ pipeline {
 //            sh "ls -lart ./*"
            sh """
                 git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
-                git fetch
+                git fetch --replace-all
+
             """
            // List all branches in your repo.
            sh "git branch -a"
