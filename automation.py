@@ -82,8 +82,8 @@ if __name__ == "__main__":
 
     # repo.git.checkout(origin_branch)
     print("checkout branch:")
-    repo.git.branch('dc-test2')
-    repo.git.checkout('dc-test2')
+    # repo.git.branch('dc-test2')
+    # repo.git.checkout('dc-test2')
     for diff_item in diff_index:
         # path = Path(diff_item.a_path).parent
         full_filename = diff_item.a_path
