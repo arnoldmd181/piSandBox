@@ -117,7 +117,7 @@ if __name__ == "__main__":
         try:
             cp = cmd.run("file path", check=True, shell=True)
             print("cp", cp)
-            cmd.run(f'git commit -m {repo_commit_message}', check=True, shell=True)
+            cmd.run(f'git commit -m \"{repo_commit_message}\"', check=True, shell=True)
             cmd.run("git push -u origin dc-test -f", check=True, shell=True)
             print("Success")
         except Exception as e:
