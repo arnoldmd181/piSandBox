@@ -134,20 +134,20 @@ if __name__ == "__main__":
         # except:
         #     print("Error git automation")
 
-        # try:
-        #
-        #     repo.git.add(update=True)
-        #     repo.git.commit(m=repo_commit_message)
-        #     repo.git.push("origin", "dc-test2")
+        try:
+
+            repo.git.add(update=True)
+            repo.git.commit(m=repo_commit_message)
+            repo.git.push("origin", "HEAD:dc-test")
         #     # origin = repo.remote(name='origin/dc-test')
         #     # origin.push()
         #     # repo.git.checkout(origin_branch)
         #     # repo.remotes.origin.push()
         #
-        # except Exception as e:
-        #     # logger.warning(f'Failed to read ETDR password so pymysql will not be set up correctly\n{e}')
-        #     print(f'Failed to read push to remote \n{e}')
-        #     exit(-1)
+        except Exception as e:
+            # logger.warning(f'Failed to read ETDR password so pymysql will not be set up correctly\n{e}')
+            print(f'Failed to read push to remote \n{e}')
+            exit(-1)
     else:
         # logger.warning("No version update needed")
         print("No version update needed")
