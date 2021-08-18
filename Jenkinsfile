@@ -53,7 +53,7 @@ pipeline {
                     git fetch --all
                     git branch
                     git branch -r
-                    git log –oneline
+                    git log --oneline
                     git checkout dc-test
                 '''
                 sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME}"
