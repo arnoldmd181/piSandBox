@@ -119,7 +119,7 @@ if __name__ == "__main__":
 
             repo.git.add(update=True)
             repo.git.commit(m=repo_commit_message)
-            repo.git.push("origin", branch)
+            repo.git.push("origin")
             # origin = repo.remote(name='origin/dc-test')
             # origin.push()
             # repo.git.checkout(origin_branch)
