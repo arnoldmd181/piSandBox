@@ -54,14 +54,16 @@ def push_changes(curr_branch):
         print(f'Failed to read push to remote \n{e}')
         exit(-1)
 
+def build_automation ():
+
 
 if __name__ == "__main__":
     # print("Running Automation Deployment")
     # initialize_logging()
 
     #initialized github creds
-    os.system("git config --global user.name \"Arnold Dajao\"")
-    os.system("git config --global user.email \"arnold.dajao@ironnetcybersecurity.com\"")
+    # os.system("git config --global user.name \"Arnold Dajao\"")
+    # os.system("git config --global user.email \"arnold.dajao@ironnetcybersecurity.com\"")
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--workspace', type=str, required=True)
