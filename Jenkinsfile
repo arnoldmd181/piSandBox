@@ -48,7 +48,7 @@ pipeline {
                     ls -lah
                     git --version
                     git status
-                    git log –oneline
+                    git log --oneline
                     git log
                     git fetch --all
                     git branch
