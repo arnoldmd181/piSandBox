@@ -154,13 +154,15 @@ if __name__ == "__main__":
 
             classifier_path = f'{workspace}/{classifier}'
             # run test
-            # autopep_test('flake8', classifier_path)
+            autopep_test('flake8', classifier_path)
             # run autopep
+            # subprocess.run(["ls", "-l"])
 
-            # autopep_test('autopep8 -i -a', f'{classifier_path}/*/*.py')
+            autopep_test('autopep8', f' -i -a {classifier_path}/*/*.py')
             # clean
             # delete_files(f'{classifier_path}/build/')
             # delete_files(f'{classifier_path}/dist/')
+
             # wheel
 
             # deploy
