@@ -52,7 +52,7 @@ def push_changes(curr_branch):
         head_branch = f'HEAD:{curr_branch}'
         repo.git.add(update=True)
         repo.git.commit(m=repo_commit_message)
-        repo.git.push("origin", "HEAD:dc-test")
+        repo.git.push("origin", head_branch)
     except Exception as e:
         # logger.warning(f'Failed to read ETDR password so pymysql will not be set up correctly\n{e}')
         print(f'Failed to read push to remote \n{e}')
@@ -67,7 +67,7 @@ def classifiers_with_changes():
         file_changed = re.split(r'\/', full_filename)[-1].lower()
         print(f"file updated: {full_filename}")  # TODO Delete for Testing only
         if str(file_changed) == "_version.py":
-            # logger.fatal("_version.py was changed")
+            # logger.fatal("_version.py was changed, Will not run if version was updated.")
             print("_version.py was changed")  # TODO Delete for Testing only
             exit(-1)
         if str(path_changed) in CLASSIFIERS and str(file_changed) not in EXCLUSIONS:
