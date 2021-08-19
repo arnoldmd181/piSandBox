@@ -1,10 +1,11 @@
 import os
 import sys
-
-from git import Repo
 import re
 import argparse
 import subprocess
+import shutil
+from git import Repo
+
 # import logging
 # from phishing_common.logger import LOGGER_NAME, initialize_logging
 
@@ -22,6 +23,7 @@ def increment_version(version):
     matches = pattern.match(version)
     # return matches.group(1) + str(int(matches.group(2)) + 1) + matches.group(3)
     return "test." + matches.group(1) + str(int(matches.group(2)) + 1) + matches.group(3)  # TODO Delete for Testing
+
 
 # update dependency version or update _version.py
 def update_version_deps(file_name, version, new_version):
@@ -44,6 +46,7 @@ def update_version_classifiers(file_name, version, new_version, update_classifie
         setup_file = PWD + f'/tls_certificate_classifier/setup.py'
         update_version_deps(setup_file, version, new_version)
 
+
 def push_changes(curr_branch):
     try:
         head_branch = f'HEAD:{curr_branch}'
@@ -55,7 +58,8 @@ def push_changes(curr_branch):
         print(f'Failed to read push to remote \n{e}')
         exit(-1)
 
-def classifiers_with_changes ():
+
+def classifiers_with_changes():
     classifiers_set = set()
     for diff_item in diff_index:
         full_filename = diff_item.a_path
@@ -64,7 +68,7 @@ def classifiers_with_changes ():
         print(f"file updated: {full_filename}")  # TODO Delete for Testing only
         if str(file_changed) == "_version.py":
             # logger.fatal("_version.py was changed")
-            print("_version.py was changed")   # TODO Delete for Testing only
+            print("_version.py was changed")  # TODO Delete for Testing only
             exit(-1)
         if str(path_changed) in CLASSIFIERS and str(file_changed) not in EXCLUSIONS:
             print(f"file added: {full_filename}")  # TODO Delete for Testing only
@@ -72,20 +76,29 @@ def classifiers_with_changes ():
 
     return classifiers_set
 
+
 # def autopep ():
-def autopep(path):
+def autopep_test(cmd, path):
     ret = 0
     output = b''
-    for path in os.listdir('.'):
-        if path.endswith('.py'):
-            proc_ret = subprocess.run(
-                ('flake8', path),
-                stdout=subprocess.PIPE,
-            )
-            ret |= proc_ret.returncode
-            output += proc_ret.stdout
+
+    proc_ret = subprocess.run(
+        (cmd, path),
+        stdout=subprocess.PIPE,
+    )
+    ret |= proc_ret.returncode
+    output += proc_ret.stdout
     sys.stdout.buffer.write(output)
     return ret
+
+
+def delete_files(directory):
+    for files in os.listdir(directory):
+        path = os.path.join(directory, files)
+        try:
+            shutil.rmtree(path)
+        except OSError:
+            os.remove(path)
 
 
 if __name__ == "__main__":
@@ -93,7 +106,7 @@ if __name__ == "__main__":
     # initialize_logging()
 
     # print("Running Automation Deployment")
-    #initialized github creds
+    # initialized github creds
     os.system("git config --global user.name \"Arnold Dajao\"")
     os.system("git config --global user.email \"arnold.dajao@ironnetcybersecurity.com\"")
 
@@ -123,8 +136,11 @@ if __name__ == "__main__":
 
     classifiers_updates = classifiers_with_changes()
 
+    classifiers_ordered_set = frozenset(CLASSIFIERS)
+    intersection = [x for x in classifiers_ordered_set if x in classifiers_updates]
+
     if classifiers_updates:
-        for classifier in classifiers_updates:
+        for classifier in intersection:
             print(classifier)  # TODO Delete for Testing only
 
             version_file = PWD + f'/{classifier}/{classifier}/_version.py'
@@ -136,17 +152,23 @@ if __name__ == "__main__":
             new_version_incr = increment_version(current_version)
             update_version_classifiers(version_file, current_version, new_version_incr, classifier)
 
-            # run_autopep()
-            autopep(f'{workspace}/{classifier}')
+            classifier_path = f'{workspace}/{classifier}'
+            # run test
+            # autopep_test('flake8', classifier_path)
+            # run autopep
+
+            # autopep_test('autopep8 -i -a', f'{classifier_path}/*/*.py')
+            # clean
+            delete_files(f'{classifier_path}/build/')
+            delete_files(f'{classifier_path}/dist/')
+            # wheel
+
+            # deploy
 
         ver_changes_changes = ', '.join(classifiers_updates)
         repo_commit_message = f'automation updated versions for {ver_changes_changes}'
 
-        # build
-        # autopep
-
-        # wheel
-        # deploy
+        # push changes
         push_changes(branch)
 
     else:
