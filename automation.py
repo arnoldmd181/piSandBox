@@ -159,8 +159,8 @@ if __name__ == "__main__":
 
             # autopep_test('autopep8 -i -a', f'{classifier_path}/*/*.py')
             # clean
-            delete_files(f'{classifier_path}/build/')
-            delete_files(f'{classifier_path}/dist/')
+            # delete_files(f'{classifier_path}/build/')
+            # delete_files(f'{classifier_path}/dist/')
             # wheel
 
             # deploy
