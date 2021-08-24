@@ -12,7 +12,7 @@ from git import Repo
 # logger = logging.getLogger(LOGGER_NAME)
 
 PWD = os.path.abspath(os.path.dirname(__file__))
-MAIN_REPO = "origin/dev"
+MAIN_REPO = "origin/develop"
 CLASSIFIERS = {"phishing_common", "domain_classifier", "filename_classifier", "path_classifier",
                "tls_certificate_classifier"}  # TODO does need to be in config file?
 EXCLUSIONS = {"readme.md"}  # needs to be in lower case TODO does need to be in config file?
@@ -25,7 +25,7 @@ def increment_version(version):
     return "test." + matches.group(1) + str(int(matches.group(2)) + 1) + matches.group(3)  # TODO Delete for Testing
 
 
-# update dependency version or update _version.py
+# update dependency version or update _version.py 0.1.1_dev2 to 0.1.2_dev2
 def update_version_deps(file_name, version, new_version):
     with open(file_name) as f:
         new_text = f.read().replace(version, new_version)
@@ -69,7 +69,7 @@ def classifiers_with_changes():
         if str(file_changed) == "_version.py":
             # logger.fatal("_version.py was changed, Will not run if version was updated.")
             print("_version.py was changed")  # TODO Delete for Testing only
-            exit(-1)
+            # exit(-1)
         if str(path_changed) in CLASSIFIERS and str(file_changed) not in EXCLUSIONS:
             print(f"file added: {full_filename}")  # TODO Delete for Testing only
             classifiers_set.add(path_changed)
@@ -110,19 +110,25 @@ if __name__ == "__main__":
     os.system("git config --global user.name \"Arnold Dajao\"")
     os.system("git config --global user.email \"arnold.dajao@ironnetcybersecurity.com\"")
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--workspace', type=str, required=True)
-    parser.add_argument('--branch', type=str, required=True)
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument('--workspace', type=str, required=True)
+    # parser.add_argument('--branch', type=str, required=True)
     # parser.add_argument('-w', '--workspace', dest="config_file")
-    args = parser.parse_args()
-    workspace = args.workspace
-    branch = args.branch  # TODO get from variables
+    # args = parser.parse_args()
+    # workspace = args.workspace
+    # workspace = "/Users/arnold.dajao/Documents/OldTask/Temp/Iron-predict-models-test"
+    workspace = "/Users/arnold.dajao/Documents/OldTask/Temp/piSandBox"
+    # branch = args.branch  # TODO get from variables
+    branch = "dc-test"
     origin_branch = f'origin/{branch}'
+
     repo = Repo(workspace)  # TODO get from variables
     o = repo.remotes.origin
+    print(repo.head.reference)
     # pull all origin
     # o.pull()
-    commit_origin_dev = repo.commit(MAIN_REPO)
+    # commit_origin_dev = repo.commit(MAIN_REPO)
+    commit_origin_dev = repo.commit("dc-test")
 
     # print("remote branches")
     # remote_refs = repo.remote().refs
@@ -130,7 +136,7 @@ if __name__ == "__main__":
     # for refs in remote_refs:
     #     print(refs.name)
 
-    print(f'getting commit_dev')
+    print(f'getting {commit_dev}')
     commit_dev = repo.commit(origin_branch)
     diff_index = commit_origin_dev.diff(commit_dev)
 
