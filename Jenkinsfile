@@ -1,4 +1,4 @@
-def MODEL_UPDATE = ['A', 'list', 'of', 'values']
+MODEL_UPDATE = ['A', 'list', 'of', 'values']
 
 pipeline {
     agent {
