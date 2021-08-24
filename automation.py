@@ -114,7 +114,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--workspace', type=str, required=False)
     parser.add_argument('--branch', type=str, required=False)
-    parser.add_argument('--updates', type=list, required=False)
+    parser.add_argument('--updates', type=str, required=False)
     # parser.add_argument('-w', '--workspace', dest="config_file")
     args = parser.parse_args()
     intersection2 = args.update
