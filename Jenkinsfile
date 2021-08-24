@@ -1,4 +1,9 @@
-MODEL_UPDATE = ['A', 'list', 'of', 'values']
+
+def ENVIRONMENTS() {
+  return GIT_BRANCH == 'master' ? ['dev'] : ['dev']
+  return MODEL_UPDATE = ['A', 'list', 'of', 'values']
+}
+
 
 pipeline {
     agent {
