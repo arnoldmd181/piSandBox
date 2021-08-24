@@ -1,13 +1,14 @@
-
+#!groovy
 def ENVIRONMENTS() {
+  return GIT_BRANCH == 'master' ? ['dev'] : ['dev']
   return GIT_BRANCH == 'master' ? ['dev'] : ['dev']
 }
 
-def MODEL_UPDATE() {
-    return ['A', 'list', 'of', 'values']
-}
 
 pipeline {
+    environment {
+        MODEL_UPDATE = ['A', 'list', 'of', 'values'].toSet()
+    }
     agent {
         kubernetes {
             defaultContainer 'python'
@@ -72,7 +73,7 @@ pipeline {
 	                    echo "Multiline shell steps works too"
 	                    git status
 	                '''
-	            sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME} --updates=${MODEL_UPDATE}"
+	            sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME} --updates=${env.MODEL_UPDATE}"
 	        }
 	    }
 

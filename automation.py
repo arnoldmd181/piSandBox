@@ -118,6 +118,7 @@ if __name__ == "__main__":
     # parser.add_argument('-w', '--workspace', dest="config_file")
     args = parser.parse_args()
     intersection2 = args.update
+    print(f'workspace: {args.update}, branch: {args.branch}')
     for classifier in intersection2:
         print(f'classifier: {classifier}')
     # # workspace = args.workspace
