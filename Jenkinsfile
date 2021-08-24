@@ -1,3 +1,5 @@
+def MODEL_UPDATE = ['A', 'list', 'of', 'values']
+
 pipeline {
     agent {
         kubernetes {
@@ -65,7 +67,7 @@ pipeline {
 	                    echo "Multiline shell steps works too"
 	                    git status
 	                '''
-	            sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME}"
+	            sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME} --updates=MODEL_UPDATE"
 	        }
 	    }
 

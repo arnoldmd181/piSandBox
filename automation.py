@@ -1,4 +1,5 @@
 import os
+import parser
 import sys
 import re
 import argparse
@@ -59,10 +60,10 @@ def push_changes(curr_branch):
         exit(-1)
 
 
-def classifiers_with_changes():
+def classifiers_with_changes(diff_index):
     classifiers_set = set()
     for diff_item in diff_index:
-        full_filename = diff_item.a_path
+        full_filename = diff_item
         path_changed = re.split(r'\/', full_filename)[0].lower()
         file_changed = re.split(r'\/', full_filename)[-1].lower()
         print(f"file updated: {full_filename}")  # TODO Delete for Testing only
@@ -111,74 +112,79 @@ if __name__ == "__main__":
     os.system("git config --global user.email \"arnold.dajao@ironnetcybersecurity.com\"")
 
     # parser = argparse.ArgumentParser()
-    # parser.add_argument('--workspace', type=str, required=True)
-    # parser.add_argument('--branch', type=str, required=True)
+    parser.add_argument('--workspace', type=str, required=True)
+    parser.add_argument('--branch', type=str, required=True)
+    parser.add_argument('--update', type=list, required=False)
     # parser.add_argument('-w', '--workspace', dest="config_file")
-    # args = parser.parse_args()
-    # workspace = args.workspace
-    # workspace = "/Users/arnold.dajao/Documents/OldTask/Temp/Iron-predict-models-test"
-    workspace = "/Users/arnold.dajao/Documents/OldTask/Temp/piSandBox"
-    # branch = args.branch  # TODO get from variables
-    branch = "dc-test"
-    origin_branch = f'origin/{branch}'
-
-    repo = Repo(workspace)  # TODO get from variables
-    o = repo.remotes.origin
-    print(repo.head.reference)
-    # pull all origin
-    # o.pull()
-    # commit_origin_dev = repo.commit(MAIN_REPO)
-    commit_origin_dev = repo.commit("dc-test")
-
-    # print("remote branches")
-    # remote_refs = repo.remote().refs
+    args = parser.parse_args()
+    intersection2 = args.update
+    for classifier in intersection2:
+        print(f'classifier: {classifier}')
+    # # workspace = args.workspace
+    # # workspace = "/Users/arnold.dajao/Documents/OldTask/Temp/Iron-predict-models-test"
+    # workspace = "/Users/arnold.dajao/Documents/OldTask/Temp/piSandBox"
+    # # branch = args.branch  # TODO get from variables
+    # branch = "dc-test"
+    # origin_branch = f'origin/{branch}'
     #
-    # for refs in remote_refs:
-    #     print(refs.name)
-
-    print(f'getting {commit_dev}')
-    commit_dev = repo.commit(origin_branch)
-    diff_index = commit_origin_dev.diff(commit_dev)
-
-    classifiers_updates = classifiers_with_changes()
-
-    classifiers_ordered_set = frozenset(CLASSIFIERS)
-    intersection = [x for x in classifiers_ordered_set if x in classifiers_updates]
-
-    if classifiers_updates:
-        for classifier in intersection:
-            print(classifier)  # TODO Delete for Testing only
-
-            version_file = PWD + f'/{classifier}/{classifier}/_version.py'
-            # Read Version file
-            exec(open(version_file).read())
-
-            current_version = __version__
-            # update version
-            new_version_incr = increment_version(current_version)
-            update_version_classifiers(version_file, current_version, new_version_incr, classifier)
-
-            classifier_path = f'{workspace}/{classifier}'
-            # run test
-            autopep_test('flake8', classifier_path)
-            # run autopep
-            # subprocess.run(["ls", "-l"])
-
-            autopep_test('autopep8', f' -i -a {classifier_path}/*/*.py')
-            # clean
-            # delete_files(f'{classifier_path}/build/')
-            # delete_files(f'{classifier_path}/dist/')
-
-            # wheel
-
-            # deploy
-
-        ver_changes_changes = ', '.join(classifiers_updates)
-        repo_commit_message = f'automation updated versions for {ver_changes_changes}'
-
-        # push changes
-        push_changes(branch)
-
-    else:
-        # logger.warning("No version update needed")
-        print("No version update needed")
+    # repo = Repo(workspace)  # TODO get from variables
+    # o = repo.remotes.origin
+    # print(repo.head.reference)
+    # # pull all origin
+    # # o.pull()
+    # # commit_origin_dev = repo.commit(MAIN_REPO)
+    # # commit_origin_dev = repo.commit("dc-test")
+    # commit_origin_dev = repo.index.diff(None)
+    # # print("remote branches")
+    # # remote_refs = repo.remote().refs
+    # #
+    # git = repo.git
+    # diffs = git.diff('--name-only', origin_branch).split('\n')
+    #
+    # print(f'diff_ind: {type(diffs)}')
+    #
+    # # commit_dev = repo.commit(origin_branch)
+    # # print(f'getting diff commit_origin_dev: {commit_origin_dev} , commit_dev: {commit_dev}')
+    # # diff_index = commit_origin_dev.diff(commit_dev)
+    #
+    # classifiers_updates = classifiers_with_changes(diffs)
+    # classifiers_ordered_set = frozenset(CLASSIFIERS)
+    # intersection = [x for x in classifiers_ordered_set if x in classifiers_updates]
+    #
+    # if classifiers_updates:
+    #     for classifier in intersection:
+    #         print(classifier)  # TODO Delete for Testing only
+    #
+    #         version_file = PWD + f'/{classifier}/{classifier}/_version.py'
+    #         # Read Version file
+    #         exec(open(version_file).read())
+    #
+    #         current_version = __version__
+    #         # update version
+    #         new_version_incr = increment_version(current_version)
+    #         update_version_classifiers(version_file, current_version, new_version_incr, classifier)
+    #
+    #         classifier_path = f'{workspace}/{classifier}'
+    #         # run test
+    #         # autopep_test('flake8', classifier_path)
+    #         # run autopep
+    #         # subprocess.run(["ls", "-l"])
+    #
+    #         autopep_test('autopep8', f' -i -a {classifier_path}/*/*.py')
+    #         # clean
+    #         # delete_files(f'{classifier_path}/build/')
+    #         # delete_files(f'{classifier_path}/dist/')
+    #
+    #         # wheel
+    #
+    #         # deploy
+    #
+    #     ver_changes_changes = ', '.join(classifiers_updates)
+    #     repo_commit_message = f'automation updated versions for {ver_changes_changes}'
+    #
+    #     # push changes
+    #     push_changes(branch)
+    #
+    # else:
+    #     # logger.warning("No version update needed")
+    #     print("No version update needed")
