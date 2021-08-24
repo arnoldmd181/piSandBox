@@ -7,7 +7,7 @@ def ENVIRONMENTS() {
 
 pipeline {
     environment {
-        MODEL_UPDATE = ['A', 'list', 'of', 'values'].toSet()
+        MODEL_UPDATE = "phishing_common, domain_classifier"
     }
     agent {
         kubernetes {
