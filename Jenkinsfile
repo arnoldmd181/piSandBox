@@ -74,7 +74,7 @@ pipeline {
 	                    echo "Multiline shell steps works too"
 	                    git status
 	                '''
-	            sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME} --updates=${env.MODEL_UPDATE}"
+	            sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME} --updates=\'${env.MODEL_UPDATE}\'"
 	        }
 	    }
 
