@@ -66,8 +66,9 @@ pipeline {
 		        }
 	      	}
 	    }
-	    stage("automation") {
+	        stage("automation") {
 	        steps {
+	        echo 'MODEL_UPDATE: ${env.MODEL_UPDATE}'
 	           echo '> Running automation ...'
 	           sh '''
 	                    echo "Multiline shell steps works too"
