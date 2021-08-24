@@ -112,8 +112,8 @@ if __name__ == "__main__":
     os.system("git config --global user.email \"arnold.dajao@ironnetcybersecurity.com\"")
 
     # parser = argparse.ArgumentParser()
-    parser.add_argument('--workspace', type=str, required=True)
-    parser.add_argument('--branch', type=str, required=True)
+    parser.add_argument('--workspace', type=str, required=False)
+    parser.add_argument('--branch', type=str, required=False)
     parser.add_argument('--update', type=list, required=False)
     # parser.add_argument('-w', '--workspace', dest="config_file")
     args = parser.parse_args()
