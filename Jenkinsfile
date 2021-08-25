@@ -40,33 +40,7 @@ pipeline {
                     sh 'printenv'
                 }
             }
-
-        }
-	    stage('Checkout') {
-	      	steps {
-		        script {
-		           // The below will clone your repo and will be checked out to master branch by default.
-		           sh "git status"
-		           print("cloning repo")
-// 		           git credentialsId: 'TestGitToken1', url: 'https://github.com/arnoldmd181/piSandBox.git'
-		           // Do a ls -lart to view all the files are cloned. It will be clonned. This is just for you to be sure about it.
-		           print("ls")
-// 		           sh """
-// 		                git fetch --all
-// 		            """
-		            //                 git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
-		            sh "git status"
-
-		           // List all branches in your repo.
-		           sh "git branch -a"
-
-		           // Checkout to a specific branch in your repo.
-// 		           sh "git checkout remotes/origin/dc-test"
-		            sh "git status"
-		        }
-	      	}
-	    }
-	        stage("automation") {
+	    stage("automation") {
 	        steps {
 	        echo 'MODEL_UPDATE: ${env.MODEL_UPDATE}'
 	           echo '> Running automation ...'
@@ -75,7 +49,7 @@ pipeline {
 	                    git status
 	                '''
 // 	            sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME} --updates=\'${env.MODEL_UPDATE}\'"
-	            sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME} --updates ${MODEL_UPDATE}"
+	            sh "python3 ${WORKSPACE}/automation.py --workspace ${WORKSPACE} --branch ${BRANCH_NAME} --updates ${MODEL_UPDATE}"
 	        }
 	    }
 
