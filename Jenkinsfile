@@ -9,10 +9,6 @@ def MODEL_UPDATE = ['indexer', 'transformer', 'ingest-api']
 //         MODEL_UPDATE = "phishing_common,domain_classifier"
 
 pipeline {
-    environment {
-//             MODEL_UPDATE = ['indexer', 'transformer', 'ingest-api']
-//             MODEL_UPDATE = "phishing_common,domain_classifier"
-    }
     agent {
         kubernetes {
             defaultContainer 'python'
@@ -79,7 +75,7 @@ pipeline {
 	                    git status
 	                '''
 // 	            sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME} --updates=\'${env.MODEL_UPDATE}\'"
-	            sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME} --updates=${env.MODEL_UPDATE}"
+	            sh "python3 ${WORKSPACE}/automation.py --workspace=${WORKSPACE} --branch=${BRANCH_NAME} --updates=${MODEL_UPDATE}"
 	        }
 	    }
 
