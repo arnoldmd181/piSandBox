@@ -10,8 +10,8 @@
 
 pipeline {
     environment {
-//             MODEL_UPDATE = ['indexer', 'transformer', 'ingest-api']
-            MODEL_UPDATE = "phishing_common,domain_classifier"
+            MODEL_UPDATE = ['indexer', 'transformer', 'ingest-api']
+//             MODEL_UPDATE = "phishing_common,domain_classifier"
     }
     agent {
         kubernetes {
