@@ -40,6 +40,7 @@ pipeline {
                     sh 'printenv'
                 }
             }
+        }
 	    stage("automation") {
 	        steps {
 	        echo 'MODEL_UPDATE: ${env.MODEL_UPDATE}'
