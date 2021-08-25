@@ -10,7 +10,6 @@
 
 pipeline {
     environment {
-
             MODEL_UPDATE = ['indexer', 'transformer', 'ingest-api']
     }
     agent {
