@@ -4,7 +4,7 @@
 //   return GIT_BRANCH == 'master' ? ['dev'] : ['dev']
 // }
 
-def MODEL_UPDATE = ['indexer', 'transformer', 'ingest-api']
+def MODEL_UPDATE = "indexer transformer ingest-api"
 // def MODEL_UPDATE = "phishing_common,domain_classifier"
 //         MODEL_UPDATE = "phishing_common,domain_classifier"
 
