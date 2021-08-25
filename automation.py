@@ -119,7 +119,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     intersection2 = re.split(r',', args.updates)
     print(f'workspace: {args.updates}, branch: {args.branch}')
-    for classifier in intersection2:
+    for classifier in args.updates:
         print(f'classifier: {classifier}')
     # # workspace = args.workspace
     # # workspace = "/Users/arnold.dajao/Documents/OldTask/Temp/Iron-predict-models-test"
