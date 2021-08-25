@@ -8,9 +8,9 @@ def MODEL_UPDATE = ['indexer', 'transformer', 'ingest-api']
 // def MODEL_UPDATE = "phishing_common,domain_classifier"
 
 pipeline {
-    environment {
-        MODEL_UPDATE = "phishing_common,domain_classifier"
-    }
+//     environment {
+//         MODEL_UPDATE = "phishing_common,domain_classifier"
+//     }
     agent {
         kubernetes {
             defaultContainer 'python'
