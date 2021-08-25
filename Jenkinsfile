@@ -1,13 +1,14 @@
 #!groovy
-def ENVIRONMENTS() {
-  return GIT_BRANCH == 'master' ? ['dev'] : ['dev']
-  return GIT_BRANCH == 'master' ? ['dev'] : ['dev']
-}
+// def ENVIRONMENTS() {
+//   return GIT_BRANCH == 'master' ? ['dev'] : ['dev']
+//   return GIT_BRANCH == 'master' ? ['dev'] : ['dev']
+// }
 
+def MODEL_UPDATE = "phishing_common,domain_classifier"
 
 pipeline {
     environment {
-        MODEL_UPDATE = "phishing_common, domain_classifier"
+        MODEL_UPDATE = "phishing_common,domain_classifier"
     }
     agent {
         kubernetes {
